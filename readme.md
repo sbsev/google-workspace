@@ -1,42 +1,22 @@
-# Guide to Google Apps Manager
+<p align="center">
+  <a href="https://studenten-bilden-schueler.de"><img src="assets/favicon.svg" alt="Favicon" width=150></a>
+</p>
 
-## Rationale
+<h1 align="center">
+  Code, Assets and Guides for our Google Workspace
+</h1>
 
-As our chapter count grows, do does the size of our [Google Workspace](https://workspace.google.com). As the number of accounts has long surpassed 150, it's becoming increasingly important to be able perform bulk operations for managing group memberships, profile information, email signatures, etc.
+<h3 align="center">
 
-[![Chapter map](assets/chapter-map.png)](https://studenten-bilden-schueler.de/standorte)
+[![License](https://img.shields.io/github/license/sbsev/google-workspace?label=License)](/license)
+![GitHub repo size](https://img.shields.io/github/repo-size/sbsev/google-workspace?label=Repo+Size)
+[![GitHub last commit](https://img.shields.io/github/last-commit/sbsev/google-workspace?label=Last+Commit)](https://github.com/sbsev/actions/commits/master)
+[![This project uses Python 3.8+](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org/downloads)
 
-Google Apps Manager (GAM) is a powerful command line utility with comprehensive batch operations for all manner of Google Workspace functionality. It's available at <https://github.com/jay0lee/gam>. Install it by opening a terminal and running
+</h3>
 
-```sh
-bash <(curl -s -S -L <https://git.io/install-gam>)
-```
+Folders of interest:
 
-`gam` will guide you step by step through the authentication and authorization process.
-
-## Usage Examples
-
-### Add accounts to group
-
-To add multiple (usually newly created) accounts to a group, use a CSV file containing all (and only) the emails to be added to the group in one column:
-
-```sh
-gam csv path/to/file.csv gam update group kommunikation@studenten-bilden-schueler.de add member user ~"Email Address [Required]"
-```
-
-![Bulk add accounts to group](assets/bulk-add-accounts-to-group.png)
-
-### Set profile pictures
-
-```sh
-gam group (schueler|studenten|kommunikation) update photo path/to/image.png
-```
-
-![Bulk set profile picture](assets/bulk-set-profile-picture.png)
-
-## Helpful Links
-
-- [GAM docs](https://github.com/jay0lee/GAM/wiki): very detailed and comprehensive
-- [sbsev/gam](https://github.com/sbsev/gam): link to this repo
-- [GAM commands](https://sites.google.com/jis.edu.bn/gam-commands): extensive list of usage examples
-- [Google Drive](https://drive.google.com/drive/folders/1FfvgltvxH_fb1ee7efXcXgAZxO4HcBP4): Link to a folder with CSV files for bulk adding new users (requires authentication)
+- [`email-signatures`](email-signatures): contains chapter and board email signatures in HTML format plus associated image assets
+- [`google-apps-manager`](google-apps-manager): illustrated guide to Google Apps Manager (`gam` CLI)
+- [`google-workspace-scripts`](google-workspace-scripts): Python script for querying and plotting creation and login statistics of our Workspace accounts.
