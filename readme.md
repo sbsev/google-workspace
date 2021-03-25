@@ -17,6 +17,6 @@
 
 Folders of interest:
 
-- [`email-signatures`](email-signatures): contains chapter and board email signatures in HTML format plus associated image assets
+- [`email-signatures`](email-signatures): contains HTML email signatures for chapter and board accounts plus associated image assets
 - [`google-apps-manager`](google-apps-manager): illustrated guide to Google Apps Manager (`gam` CLI)
-- [`google-workspace-scripts`](google-workspace-scripts): Python script for querying and plotting creation and login statistics of our Workspace accounts.
+- [`google-workspace-scripts`](google-workspace-scripts): Python script for querying and plotting creation date and last login statistics of Workspace accounts.
