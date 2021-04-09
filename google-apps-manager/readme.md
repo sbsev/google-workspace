@@ -2,17 +2,17 @@
 
 ## Rationale
 
-As our chapter count grows, do does the size of our [Google Workspace](https://workspace.google.com). As the number of accounts has long surpassed 150, it's becoming increasingly important to be able perform bulk operations for managing group memberships, profile information, email signatures, etc.
+As our chapter count grows, do does the size of our [Google Workspace](https://workspace.google.com). As the number of accounts has reached 200, it's becoming increasingly important to be able perform bulk operations for managing group memberships, profile information, email signatures, etc.
 
 [![Chapter map](../assets/chapter-map.png)](https://studenten-bilden-schueler.de/standorte)
 
 Google Apps Manager (GAM) is a powerful command line utility with comprehensive batch operations for all manner of Google Workspace functionality. It's available at <https://github.com/jay0lee/gam>. Install it by opening a terminal and running
 
 ```sh
-bash <(curl -s -S -L <https://git.io/install-gam>)
+bash <(curl -s -S -L https://git.io/install-gam)
 ```
 
-`gam` will guide you step by step through the authentication and authorization process.
+`gam` will guide you through the authentication and authorization process.
 
 ## Usage Examples
 
@@ -21,10 +21,18 @@ bash <(curl -s -S -L <https://git.io/install-gam>)
 To add multiple (usually newly created) accounts to a group, use a CSV file containing all (and only) the emails to be added to the group in one column:
 
 ```sh
-gam csv path/to/file.csv gam update group kommunikation@studenten-bilden-schueler.de add member user ~"Email Address [Required]"
+gam csv path/to/file.csv gam update group kommunikation add member user ~"Email Address [Required]"
 ```
 
 ![Bulk add accounts to group](../assets/bulk-add-accounts-to-group.png)
+
+Or, directly on the command line without CSV:
+
+```sh
+gam update group kommunikation add member info.weimar info.hamburg info.bayreuth info.greifswald
+gam update group schueler add member schueler.weimar schueler.hamburg schueler.bayreuth schueler.greifswald
+gam update group studenten add member studenten.weimar studenten.hamburg studenten.bayreuth studenten.greifswald
+```
 
 ### Set profile pictures
 
