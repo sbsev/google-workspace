@@ -47,3 +47,37 @@ gam group (schueler|studenten|kommunikation) update photo path/to/image.png
 - [GAM docs](https://github.com/jay0lee/GAM/wiki): very detailed and comprehensive
 - [GAM commands](https://sites.google.com/jis.edu.bn/gam-commands): extensive list of usage examples
 - [Google Drive](https://drive.google.com/drive/folders/1FfvgltvxH_fb1ee7efXcXgAZxO4HcBP4): Link to a folder with CSV files for bulk adding new users (requires authentication)
+
+## Create Accounts for new Chapter
+
+```sh
+gam create user info.oldenburg \
+ firstname Kommunikation \
+ lastname Oldenburg \
+ password Abcdef1234 \
+ changepassword on \
+ org /Standorte \
+ recoveryemail it@studenten-bilden-schueler.de
+
+gam create user schueler.oldenburg \
+ firstname Kommunikation \
+ lastname Schüler \
+ password Abcdef1234 \
+ changepassword on \
+ org /Standorte \
+ recoveryemail it@studenten-bilden-schueler.de
+
+gam create user studenten.oldenburg \
+ firstname Kommunikation \
+ lastname Studenten \
+ password Abcdef1234 \
+ changepassword on \
+ org /Standorte \
+ recoveryemail it@studenten-bilden-schueler.de
+
+for division in schueler info studenten
+do
+  gam user $division.oldenburg update photo gmail/images/sbs-owls.png
+  gam update group $division add member $division.oldenburg
+done
+```
