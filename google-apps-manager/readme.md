@@ -50,34 +50,75 @@ gam group (schueler|studenten|kommunikation) update photo path/to/image.png
 
 ## Create Accounts for new Chapter
 
+This script creates the accounts for all 3 divisions of a new chapter (Schüler, Studenten, Kommunikation). It also
+
+- sets their profile picture to our two-owls logo,
+- adds them each to their respective division groups (schueler|studenten|kommunikation@studenten-bilden-schueler.de) which automatically adds them to standorte@studenten-bilden-schueler and gives them access to the Shared Drive for chapters, and finally
+- sets their email signatures according to our chapter template in [gmail/signatures/chapters.html](gmail/signatures/chapters.html)
+
+A new chapter is thus fully setup, at least in terms of our Google Workspace. The main remaining task is to setup their Airtable Base.
+
 ```sh
-gam create user info.oldenburg \
- firstname Kommunikation \
- lastname Oldenburg \
- password Abcdef1234 \
- changepassword on \
- org /Standorte \
- recoveryemail it@studenten-bilden-schueler.de
-
-gam create user schueler.oldenburg \
- firstname Kommunikation \
- lastname Schüler \
- password Abcdef1234 \
- changepassword on \
- org /Standorte \
- recoveryemail it@studenten-bilden-schueler.de
-
-gam create user studenten.oldenburg \
- firstname Kommunikation \
- lastname Studenten \
- password Abcdef1234 \
- changepassword on \
- org /Standorte \
- recoveryemail it@studenten-bilden-schueler.de
-
-for division in schueler info studenten
+for division in schueler:Schüler studenten:Studenten info:Kommunikation
 do
+  firstname=${division#*:}
+  division=${division%:*}
+
+  gam create user $division.oldenburg \
+    firstname $firstname \
+    lastname Oldenburg \
+    password Abcdef1234 \
+    changepassword on \
+    org /Standorte \
+    recoveryemail it@studenten-bilden-schueler.de
+
   gam user $division.oldenburg update photo gmail/images/sbs-owls.png
   gam update group $division add member $division.oldenburg
+  gam user $division.oldenburg signature file gmail/signatures/chapters.html html replace lastName Oldenburg replace firstName $firstname
 done
+```
+
+For setting group membership and profile picture after the fact:
+
+```sh
+for division in schueler:Schüler studenten:Studenten info:Kommunikation
+do
+  firstname=${division#*:}
+  division=${division%:*}
+
+  gam user $division.bayreuth update photo gmail/images/sbs-owls.png
+  gam update user $division.bayreuth suspended on
+done
+```
+
+[To suspend all accounts for a chapter](https://github.com/jay0lee/GAM/wiki/GAM3DirectoryCommands#update-and-rename-a-user):
+
+```sh
+for division in schueler:Schüler studenten:Studenten info:Kommunikation
+do
+  firstname=${division#*:}
+  division=${division%:*}
+
+  gam update user $division.bayreuth suspended (on|off)
+done
+```
+
+[If you made a mistake, you can fix it with](https://github.com/jay0lee/GAM/wiki/GAM3DirectoryCommands#update-and-rename-a-user):
+
+```sh
+gam update user <email address>
+ [firstname <First Name>] [lastname <Last Name>]
+ [password <Password>]
+ [username <New Username>]
+ [email <New Email>]
+ [gal on|off] [suspended on|off] [archived on|off]
+ [sha] [md5] [crypt] [nohash]
+ [changepassword on|off] [org <Org Name>]
+ [recoveryemail <email> [recoveryphone <phone>]
+```
+
+[To retrieve a user's current email signature](https://github.com/jay0lee/GAM/wiki/ExamplesEmailSettings#retrieving-a-signature)
+
+```sh
+gam user info.oldenburg show signature
 ```
