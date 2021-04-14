@@ -54,7 +54,7 @@ This script creates the accounts for all 3 divisions of a new chapter (Schüler,
 
 - sets their profile picture to our two-owls logo,
 - adds them each to their respective division groups (schueler|studenten|kommunikation@studenten-bilden-schueler.de) which automatically adds them to standorte@studenten-bilden-schueler and gives them access to the Shared Drive for chapters, and finally
-- sets their email signatures according to our chapter template in [gmail/signatures/chapters.html](gmail/signatures/chapters.html)
+- [sets their Gmail signatures](https://github.com/jay0lee/GAM/wiki/ExamplesEmailSettings#setting-a-signature) according to our chapter template in [gmail/signatures/chapters.html](gmail/signatures/chapters.html)
 
 A new chapter is thus fully setup, at least in terms of our Google Workspace. The main remaining task is to setup their Airtable Base.
 
@@ -74,8 +74,12 @@ do
 
   gam user $division.oldenburg update photo gmail/images/sbs-owls.png
   gam update group $division add member $division.oldenburg
-  gam user $division.oldenburg signature file gmail/signatures/chapters.html html replace lastName Oldenburg replace firstName $firstname
+  gam user $division.oldenburg signature file gmail/signatures/chapters.html html replace firstName $firstname replace lastName Oldenburg
 done
+
+# division info needs special treatment
+gam update group kommunikation add member info.oldenburg
+gam update group info remove member info.oldenburg
 ```
 
 For setting group membership and profile picture after the fact:
@@ -121,4 +125,53 @@ gam update user <email address>
 
 ```sh
 gam user info.oldenburg show signature
+```
+
+[To retrieve signatures from all users in an organizational unit](https://github.com/jay0lee/GAM/wiki/ExamplesEmailSettings#retrieving-a-signature) and pipe them to a file, use
+
+```sh
+gam ou /Bundesvorstand show signature > tmp.html
+```
+
+To update a board member's signature, use
+
+```sh
+gam user janosh.riebesell signature file gmail/signatures/board.html html replace firstName Janosh replace lastName Riebesell replace department Bundesvorstand replace jobtitle IT
+```
+
+To get all users in an organizational unit, use
+
+```sh
+gam print users fields query "orgUnitPath='/Bundesvorstand'"
+```
+
+Quotes around org unit name are only necessary if the name contains spaces.
+
+To query specific fields of users in a given org unit and pipe them to a file, use
+
+```sh
+gam print users fields name,organizations query "orgUnitPath='/Bundesvorstand'" > tmp.csv
+```
+
+To update a user's department and org title, use
+
+```sh
+gam update user iwo.hasenkamp organization title "Standortbetreuung" department "Unterstützer des Bundesvorstands" primary
+```
+
+To set the signature for all board members, use
+
+```sh
+# tail -n +2 skips the column header (primaryEmail) returned by gam print
+for email in $(gam print users query "orgUnitPath='/Bundesvorstand'" | tail -n +2)
+do
+  userInfo=$(gam info user $email)
+  firstname=`echo ${userInfo/*First Name: /} | head -1`
+  lastname=`echo ${userInfo/*Last Name: /} | head -1`
+  department=`echo ${userInfo/*department: /} | head -1`
+  jobtitle=`echo ${userInfo/* title: /} | head -1`
+  echo "Replacement values: firstname=$firstname, lastname=$lastname, department=$department, jobtitle=$jobtitle"
+  gam user $email signature file gmail/signatures/board.html html replace firstName $firstname replace lastName $lastname replace department $department replace jobtitle $jobtitle
+  echo
+done
 ```
