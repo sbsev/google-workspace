@@ -2,53 +2,23 @@
 
 ## Rationale
 
-As our chapter count grows, do does the size of our [Google Workspace](https://workspace.google.com). As the number of accounts has reached 200, it's becoming increasingly important to be able perform bulk operations for managing group memberships, profile information, email signatures, etc.
+As our chapter count grows, do does the size of our [Google Workspace](https://workspace.google.com). With active accounts soon to reach 200, it's becoming increasingly important to automate account creation, group memberships, profile information, email signatures, etc.
 
 [![Chapter map](../assets/chapter-map.png)](https://studenten-bilden-schueler.de/standorte)
 
-Google Apps Manager (GAM) is a powerful command line utility with comprehensive batch operations for all manner of Google Workspace functionality. It's available at <https://github.com/jay0lee/gam>. Install it by opening a terminal and running
+Google Apps Manager (GAM) is a powerful command line utility with comprehensive batch operations for all manner of Google Workspace functionality. It's available at <https://github.com/jay0lee/gam>.
+
+## Installaltion
+
+Open a terminal and run
 
 ```sh
 bash <(curl -s -S -L https://git.io/install-gam)
 ```
 
-`gam` will guide you through the authentication and authorization process.
+`gam` will guide you through a somewhat lengthy authentication and authorization process. For guidance, consult the **[GAM docs](https://github.com/jay0lee/GAM/wiki)** (very detailed and comprehensive).
 
-## Usage Examples
-
-### Add accounts to group
-
-To add multiple (usually newly created) accounts to a group, use a CSV file containing all (and only) the emails to be added to the group in one column:
-
-```sh
-gam csv path/to/file.csv gam update group kommunikation add member user ~"Email Address [Required]"
-```
-
-![Bulk add accounts to group](../assets/bulk-add-accounts-to-group.png)
-
-Or, directly on the command line without CSV:
-
-```sh
-gam update group kommunikation add member info.weimar info.hamburg info.bayreuth info.greifswald
-gam update group schueler add member schueler.weimar schueler.hamburg schueler.bayreuth schueler.greifswald
-gam update group studenten add member studenten.weimar studenten.hamburg studenten.bayreuth studenten.greifswald
-```
-
-### Set profile pictures
-
-```sh
-gam group (schueler|studenten|kommunikation) update photo path/to/image.png
-```
-
-![Bulk set profile picture](../assets/bulk-set-profile-picture.png)
-
-## Helpful Links
-
-- [GAM docs](https://github.com/jay0lee/GAM/wiki): very detailed and comprehensive
-- [GAM commands](https://sites.google.com/jis.edu.bn/gam-commands): extensive list of usage examples
-- [Google Drive](https://drive.google.com/drive/folders/1FfvgltvxH_fb1ee7efXcXgAZxO4HcBP4): Link to a folder with CSV files for bulk adding new users (requires authentication)
-
-## Create Accounts for new Chapter
+## Example 1: Create Accounts for new Chapter
 
 This script creates the accounts for all 3 divisions of a new chapter (Schüler, Studenten, Kommunikation). It also
 
@@ -121,6 +91,16 @@ gam update user <email address>
  [recoveryemail <email> [recoveryphone <phone>]
 ```
 
+## Example 2: Set Profile Pictures for all Users in Group
+
+To set the profile picture for all users in a group, use
+
+```sh
+gam group (schueler|studenten|kommunikation) update photo gmail/images/sbs-owls.png
+```
+
+## Example 3: Gmail Signatures
+
 [To retrieve a user's current email signature](https://github.com/jay0lee/GAM/wiki/ExamplesEmailSettings#retrieving-a-signature)
 
 ```sh
@@ -174,4 +154,24 @@ do
   gam user $email signature file gmail/signatures/board.html html replace firstName $firstname replace lastName $lastname replace department $department replace jobtitle $jobtitle
   echo
 done
+```
+
+## Example 4: Groups
+
+[To create a new group, use](https://github.com/jay0lee/GAM/wiki/GAM3DirectoryCommands#create-a-group)
+
+```sh
+gam create group bremen name Bremen description "Verteiler zur Koordination der Standortgründung in Bremen"
+```
+
+[To add members, owners or managers to a group](https://github.com/jay0lee/GAM/wiki/GAM3DirectoryCommands#add-members-managers-owners-to-a-group), you can specify a single user, a group of users, an org of users or a file with users (one per line), use
+
+```sh
+gam update group bremen add member foo@bar.baz1 foo@bar.baz2 foo@bar.baz3 add manager christoph.bischoff
+```
+
+[To delete a group, use](https://github.com/jay0lee/GAM/wiki/GAM3DirectoryCommands#delete-a-group)
+
+```sh
+gam delete group bremen
 ```
