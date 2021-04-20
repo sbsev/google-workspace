@@ -18,6 +18,24 @@ bash <(curl -s -S -L https://git.io/install-gam)
 
 `gam` will guide you through a somewhat lengthy authentication and authorization process. For guidance, consult the **[GAM docs](https://github.com/jay0lee/GAM/wiki)** (very detailed and comprehensive).
 
+### Update
+
+To update an already installed version of GAM, run the same command
+
+```sh
+bash <(curl -s -S -L https://git.io/install-gam)
+```
+
+and simply press `n` when GAM asks
+
+> Can you run a full browser on this machine? (usually Y for MacOS, N for Linux if you SSH into this machine) n
+
+followed by `n` again for
+
+> GAM is now installed. Are you ready to set up a Google API project for GAM? (yes or no) n
+
+You may need to delete the `nobrowser.txt` `gam` then creates in its install directory (run `which gam` to see where it was installed).
+
 ## Example 1: Create Accounts for new Chapter
 
 This script creates the accounts for all 3 divisions of a new chapter (Schüler, Studenten, Kommunikation). It also
