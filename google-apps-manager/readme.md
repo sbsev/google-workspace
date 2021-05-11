@@ -174,6 +174,19 @@ do
 done
 ```
 
+To update the signature of a single board member, use
+
+```sh
+email=janosh.riebesell
+userInfo=$(gam info user $email)
+firstname=`echo ${userInfo/*First Name: /} | head -1`
+lastname=`echo ${userInfo/*Last Name: /} | head -1`
+department=`echo ${userInfo/*department: /} | head -1`
+jobtitle=`echo ${userInfo/* title: /} | head -1`
+echo "Replacement values: firstname=$firstname, lastname=$lastname, department=$department, jobtitle=$jobtitle"
+gam user $email signature file gmail/signatures/board.html html replace firstName $firstname replace lastName $lastname replace department $department replace jobtitle $jobtitle
+```
+
 ## Example 4: Groups
 
 [To create a new group, use](https://github.com/jay0lee/GAM/wiki/GAM3DirectoryCommands#create-a-group)
