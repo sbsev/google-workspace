@@ -70,7 +70,7 @@ gam update group kommunikation add member info.oldenburg
 gam update group info remove member info.oldenburg
 ```
 
-For setting group membership and profile picture after the fact:
+For setting profile picture and signature after the fact:
 
 ```sh
 for division in schueler:Schüler studenten:Studenten info:Kommunikation
@@ -78,8 +78,8 @@ do
   firstname=${division#*:}
   division=${division%:*}
 
-  gam user $division.bayreuth update photo gmail/images/sbs-owls.png
-  gam update user $division.bayreuth suspended on
+  gam user $division.bremen update photo gmail/images/sbs-owls.png
+  gam user $division.bremen signature file gmail/signatures/chapters.html html replace firstName $firstname replace lastName Bremen
 done
 ```
 
@@ -185,6 +185,12 @@ department=`echo ${userInfo/*department: /} | head -1`
 jobtitle=`echo ${userInfo/* title: /} | head -1`
 echo "Replacement values: firstname=$firstname, lastname=$lastname, department=$department, jobtitle=$jobtitle"
 gam user $email signature file gmail/signatures/board.html html replace firstName $firstname replace lastName $lastname replace department $department replace jobtitle $jobtitle
+```
+
+[To retrieve a user's current email signature](https://github.com/jay0lee/GAM/wiki/ExamplesEmailSettings#retrieving-a-signature), use
+
+```sh
+gam user janosh.riebesell show signature
 ```
 
 ## Example 4: Groups
