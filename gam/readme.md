@@ -2,7 +2,7 @@
 
 ## Rationale
 
-As our chapter count grows, do does the size of our [Google Workspace](https://workspace.google.com). With active accounts soon to reach 200, it's becoming increasingly important to automate account creation, group memberships, profile information, email signatures, etc.
+As our chapter count grows, so does the size of our [Google Workspace](https://workspace.google.com). With active accounts soon to reach 200, it's becoming increasingly important to automate account creation, group memberships, profile information, email signatures, etc.
 
 [![Chapter map](../assets/chapter-map.png)](https://studenten-bilden-schueler.de/standorte)
 
@@ -10,20 +10,20 @@ Google Apps Manager (GAM) is a powerful command line utility with comprehensive 
 
 ## Installaltion
 
-Open a terminal and run
+The [easiest installation option](https://github.com/jay0lee/GAM/pull/1417) is probably though `pip`. Open a terminal and run
 
 ```sh
-bash <(curl -s -S -L https://git.io/install-gam)
+pip install -U git+https://github.com/jay0lee/GAM.git#subdirectory=src
 ```
 
-`gam` will guide you through a somewhat lengthy authentication and authorization process. For guidance, consult the **[GAM docs](https://github.com/jay0lee/GAM/wiki)** (very detailed and comprehensive).
+Once installed, invoke `gam` which will guide you through a somewhat lengthy authentication and authorization process. For guidance, consult the **[GAM docs](https://github.com/jay0lee/GAM/wiki)** (very detailed and comprehensive).
 
 ### Update
 
 To update an already installed version of GAM, run the same command
 
 ```sh
-bash <(curl -s -S -L https://git.io/install-gam)
+pip install -U git+https://github.com/jay0lee/GAM.git#subdirectory=src
 ```
 
 and simply press `n` when GAM asks
@@ -34,17 +34,17 @@ followed by `n` again for
 
 > GAM is now installed. Are you ready to set up a Google API project for GAM? (yes or no) n
 
-You may need to delete the `nobrowser.txt` `gam` then creates in its install directory (run `which gam` to see where it was installed).
+You may need to delete the `nobrowser.txt` which `gam` then creates in its install directory (run `which gam` to see where it was installed).
 
 ## Example 1: Create Accounts for new Chapter
 
-This script creates the accounts for all 3 divisions of a new chapter (Schüler, Studenten, Kommunikation). It also
+The commands below create the accounts for all 3 divisions of a new chapter (Schüler, Studenten, Kommunikation). It also
 
 - sets their profile picture to our two-owls logo,
-- adds them each to their respective division groups (schueler|studenten|kommunikation@studenten-bilden-schueler.de) which automatically adds them to standorte@studenten-bilden-schueler and gives them access to the Shared Drive for chapters, and finally
+- adds them each to their respective division groups (schueler|studenten|kommunikation@studenten-bilden-schueler.de) which automatically adds them to standorte@studenten-bilden-schueler and gives them access to the Shared Google Drive for chapters (Drive für Standorte), and finally
 - [sets their Gmail signatures](https://github.com/jay0lee/GAM/wiki/ExamplesEmailSettings#setting-a-signature) according to our chapter template in [gmail/signatures/chapters.html](gmail/signatures/chapters.html)
 
-A new chapter is thus fully setup, at least in terms of our Google Workspace. The main remaining task is to setup their Airtable Base.
+A new chapter is then fully setup, at least in terms of our Google Workspace. The main remaining task is to setup their Airtable base.
 
 ```sh
 for division in schueler:Schüler studenten:Studenten info:Kommunikation
@@ -212,3 +212,30 @@ gam update group bremen add member foo@bar.baz1 foo@bar.baz2 foo@bar.baz3 add ma
 ```sh
 gam delete group bremen
 ```
+
+To check which [OAuth scopes](https://wikipedia.org/wiki/OAuth) are currently authorized, run `gam oauth info`:
+
+```txt
+OAuth File: /Users/janosh/Repos/sbs-google-workspace/gam/oauth2.txt
+Client ID: 436676890592-u137vkq3e3c42udj7egsoln4soci6v9j.apps.googleusercontent.com
+Scopes (11)
+  https://googleapis.com/auth/admin.directory.customer
+  https://googleapis.com/auth/admin.directory.domain
+  https://googleapis.com/auth/admin.directory.group
+  https://googleapis.com/auth/admin.directory.orgunit
+  https://googleapis.com/auth/admin.directory.rolemanagement
+  https://googleapis.com/auth/admin.directory.user
+  https://googleapis.com/auth/admin.directory.user.security
+  https://googleapis.com/auth/admin.directory.userschema
+  https://googleapis.com/auth/apps.groups.settings
+  https://googleapis.com/auth/userinfo.email
+  openid
+Google Workspace Admin: janosh.riebesell@studenten-bilden-schueler.de
+Expires: 2021-08-27T21:27:08.695019
+audience: 436676890592-u137vkq3e3c42udj7egsoln4soci6v9j.apps.googleusercontent.com
+user_id: 111512315526918277780
+verified_email: True
+access_type: offline
+```
+
+`openid` seems to be added automatically. Additional scopes will be selected by default during setup and shouldn't hurt but aren't needed. Feel free to deselect for safety.
