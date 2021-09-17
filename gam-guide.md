@@ -4,7 +4,7 @@
 
 As our chapter count grows, so does the size of our [Google Workspace](https://workspace.google.com). With active accounts soon to reach 200, it's becoming increasingly important to automate account creation, group memberships, profile information, email signatures, etc.
 
-[![Chapter map](../assets/chapter-map.png)](https://studenten-bilden-schueler.de/standorte)
+[![Chapter map](assets/chapter-map.png)](https://studenten-bilden-schueler.de/standorte)
 
 GAM is a powerful command line interface (CLI) with comprehensive batch operations for all manner of Google Workspace functionality. It's available at <https://github.com/jay0lee/gam>.
 
@@ -239,3 +239,9 @@ access_type: offline
 ```
 
 `openid` seems to be added automatically. Additional scopes will be selected by default during setup and shouldn't hurt but aren't needed. Feel free to deselect for safety.
+
+If getting errors like
+
+> ERROR: [...] Client is unauthorized to retrieve access tokens using this method, or client not authorized for any of the scopes requested.
+
+you may need to enable "Domain-wide Delegation" for the service account you're using on Google Cloud Platform > IAM & Admin > Service Accounts.
