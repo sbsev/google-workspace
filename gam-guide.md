@@ -109,7 +109,28 @@ gam update user <email address>
  [recoveryemail <email> [recoveryphone <phone>]
 ```
 
-## Example 2: Set Profile Pictures for all Users in Group
+## Example 2: Create account for new board member
+
+```sh
+login=max.mustermann
+firstname=Max
+lastname=Mustermann
+gam create user $login \
+  firstname $firstname \
+  lastname $lastname \
+  password Abcdef1234 \
+  changepassword on \
+  org /Bundesvorstand \
+  recoveryemail it@studenten-bilden-schueler.de
+
+gam user $login signature file gmail/signatures/board.html html replace firstName $firstname replace lastName $lastname
+# set initial profile picture to account logo just so its not empty
+gam user $login update photo gmail/images/sbs-owls.png
+gam update group bundesvorstand add member $login
+gam update group <some other resort like finanzen,it,recht,presse,...> add member $login
+```
+
+## Example 3: Set Profile Pictures for all Users in Group
 
 To set the profile picture for all users in a group, use
 
@@ -117,7 +138,7 @@ To set the profile picture for all users in a group, use
 gam group (schueler|studenten|kommunikation) update photo gmail/images/sbs-owls.png
 ```
 
-## Example 3: Gmail Signatures
+## Example 4: Gmail Signatures
 
 [To retrieve a user's current email signature](https://github.com/jay0lee/GAM/wiki/ExamplesEmailSettings#retrieving-a-signature)
 
@@ -193,7 +214,7 @@ gam user $email signature file gmail/signatures/board.html html replace firstNam
 gam user janosh.riebesell show signature
 ```
 
-## Example 4: Groups
+## Example 5: Groups
 
 [To create a new group, use](https://github.com/jay0lee/GAM/wiki/GAM3DirectoryCommands#create-a-group)
 
