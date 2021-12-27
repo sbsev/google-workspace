@@ -47,27 +47,29 @@ The commands below create the accounts for all 3 divisions of a new chapter (Sch
 A new chapter is then fully setup, at least in terms of our Google Workspace. The main remaining task is to setup their Airtable base.
 
 ```sh
+city=kiel
+City=Kiel
 for division in schueler:Schüler studenten:Studenten info:Kommunikation
 do
   firstname=${division#*:}
   division=${division%:*}
 
-  gam create user $division.oldenburg \
+  gam create user $division.$city \
     firstname $firstname \
-    lastname Oldenburg \
+    lastname $City \
     password Abcdef1234 \
     changepassword on \
     org /Standorte \
     recoveryemail it@studenten-bilden-schueler.de
 
-  gam user $division.oldenburg update photo gmail/images/sbs-owls.png
-  gam update group $division add member $division.oldenburg
-  gam user $division.oldenburg signature file gmail/signatures/chapters.html html replace firstName $firstname replace lastName Oldenburg
+  gam user $division.$city update photo gmail/images/sbs-owls.png
+  gam update group $division add member $division.$city
+  gam user $division.$city signature file gmail/signatures/chapters.html html replace firstName $firstname replace lastName $City
 done
 
 # division info needs special treatment
-gam update group kommunikation add member info.oldenburg
-gam update group info remove member info.oldenburg
+gam update group kommunikation add member info.$city
+gam update group info remove member info.$city
 ```
 
 For setting profile picture and signature after the fact:
