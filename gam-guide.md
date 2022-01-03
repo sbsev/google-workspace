@@ -8,7 +8,7 @@ As our chapter count grows, so does the size of our [Google Workspace](https://w
 
 GAM is a powerful command line interface (CLI) with comprehensive batch operations for all manner of Google Workspace functionality. It's available at <https://github.com/jay0lee/gam>.
 
-## Installaltion
+## Installation
 
 The [easiest installation option](https://github.com/jay0lee/GAM/pull/1417) is probably though `pip`. Open a terminal and run
 
@@ -34,7 +34,24 @@ followed by `n` again for
 
 > GAM is now installed. Are you ready to set up a Google API project for GAM? (yes or no) n
 
-You may need to delete the `nobrowser.txt` which `gam` then creates in its install directory (run `which gam` to see where it was installed).
+You may need to delete the `nobrowser.txt` which `gam` then creates in its install directory. Run `which gam` to see where the binary is (will also be the `nobrowser.txt` location when not installed with `pip`) or for `pip`-installed `gam`:
+
+```py
+$ python
+>>> import gam
+>>> gam.__file__
+'~/.venv/py310/lib/python3.10/site-packages/gam/__init__.py'
+```
+
+## Uninstall
+
+```sh
+pip uninstall -y GAM-for-Google-Workspace
+# to get rid of all the Google Oauth packages
+pip list | grep google | xargs pip uninstall -y
+# delete gam created auth files polluting site-packages (only necessary when pip-installed)
+rm ~/.venv/py310/lib/python3.10/site-packages/{oauth2.txt,client_secrets.json,oauth2service.json}
+```
 
 ## Example 1: Create Accounts for new Chapter
 
