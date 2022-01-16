@@ -143,7 +143,7 @@ gam create user $login \
   recoveryemail it@studenten-bilden-schueler.de
 
 gam user $login signature file gmail/signatures/board.html html replace firstName $firstname replace lastName $lastname
-# set initial profile picture to account logo just so its not empty
+# set initial profile picture to owl logo just so its not empty
 gam user $login update photo gmail/images/sbs-owls.png
 gam update group bundesvorstand add member $login
 gam update group <some other resort like finanzen,it,recht,presse,...> add member $login
@@ -251,6 +251,15 @@ gam update group bremen add member foo@bar.baz1 foo@bar.baz2 foo@bar.baz3 add ma
 
 ```sh
 gam delete group bremen
+```
+
+To delete all accounts for a chapter, use
+
+```sh
+city=bielefeld
+for division in info schueler studenten; do
+  gam delete user $division."$city"
+done
 ```
 
 To check which [OAuth scopes](https://wikipedia.org/wiki/OAuth) are currently authorized, run `gam oauth info`:

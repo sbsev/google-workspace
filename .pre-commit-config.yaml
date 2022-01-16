@@ -42,15 +42,14 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
 
-  - repo: https://github.com/markdownlint/markdownlint
-    rev: v0.11.0
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.30.0
     hooks:
       - id: markdownlint
-        # MD013: Line length
-        # MD029: Ordered list item prefix
-        # MD033: Inline HTML
-        # MD034: Bare URL used
-        args: [-r, '~MD013,~MD029,~MD033,~MD034']
+        # MD013: line too long
+        # MD033: no inline HTML
+        # MD041: first line in a file should be a top-level heading
+        args: [--disable, MD013, MD033, MD041, '--']
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.1.0
