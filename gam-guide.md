@@ -18,6 +18,8 @@ pip install -U git+https://github.com/jay0lee/GAM.git#subdirectory=src
 
 Once installed, invoke `gam` which will guide you through a somewhat lengthy authentication and authorization process. For guidance, consult the **[GAM docs](https://github.com/jay0lee/GAM/wiki)** (very detailed and comprehensive).
 
+You might get an installation error if [swig](https://en.wikipedia.org/wiki/SWIG) or pcsclite ("winscard.h", for smartcard support) are not installed on your system. In that case, you must install them first.
+
 ### Update
 
 To update an already installed version of GAM, run the same command
