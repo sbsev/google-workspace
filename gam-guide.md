@@ -1,5 +1,7 @@
 # GAM Guide
 
+Check out this [**video guide**](https://youtu.be/mVxL8Ou9nSk) for getting started with `gam`.
+
 ## Rationale
 
 As our chapter count grows, so does the size of our [Google Workspace](https://workspace.google.com). With active accounts soon to reach 200, it's becoming increasingly important to automate account creation, group memberships, profile information, email signatures, etc.
@@ -18,13 +20,15 @@ pip install -U git+https://github.com/jay0lee/GAM.git#subdirectory=src
 
 Once installed, invoke `gam` which will guide you through a somewhat lengthy authentication and authorization process. For guidance, consult the **[GAM docs](https://github.com/jay0lee/GAM/wiki)** (very detailed and comprehensive).
 
-You might get an installation error if [swig](https://en.wikipedia.org/wiki/SWIG) and / or pcsclite ("winscard.h", for smartcard support) are not installed on your system. In that case, you must install them first.
+You might get an error if [`swig`](https://en.wikipedia.org/wiki/SWIG) and/or `pcsclite` (`"winscard.h"`, for smartcard support) are not installed on your system. In that case, try:
 
 ```sh
 apt-get install swig pcsc-lite # on Ubuntu
 pacman -S swig pcsclite # on Arch Linux
-brew install swig pcsc-lite # on macOS
+brew install swig # on macOS
 ```
+
+In case of other errors, contact <it@studenten-bilden-schueler.de>.
 
 ### Update
 
