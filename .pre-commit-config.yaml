@@ -3,6 +3,8 @@ ci:
 
 default_stages: [commit]
 
+default_install_hook_types: [pre-commit, commit-msg]
+
 repos:
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
@@ -10,7 +12,7 @@ repos:
       - id: isort
 
   - repo: https://github.com/psf/black
-    rev: 21.12b0
+    rev: 22.3.0
     hooks:
       - id: black
 
@@ -20,13 +22,13 @@ repos:
       - id: flake8
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.31.0
+    rev: v2.31.1
     hooks:
       - id: pyupgrade
         args: [--py38-plus]
 
   - repo: https://github.com/janosh/format-ipy-cells
-    rev: v0.1.7
+    rev: v0.1.10
     hooks:
       - id: format-ipy-cells
 
@@ -43,7 +45,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.30.0
+    rev: v0.31.1
     hooks:
       - id: markdownlint
         # MD013: line too long
