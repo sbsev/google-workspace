@@ -12,17 +12,17 @@ repos:
       - id: isort
 
   - repo: https://github.com/psf/black
-    rev: 22.3.0
+    rev: 22.8.0
     hooks:
       - id: black
 
   - repo: https://github.com/PyCQA/flake8
-    rev: 4.0.1
+    rev: 5.0.4
     hooks:
       - id: flake8
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.31.1
+    rev: v2.38.2
     hooks:
       - id: pyupgrade
         args: [--py38-plus]
@@ -33,7 +33,7 @@ repos:
       - id: format-ipy-cells
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.3.0
     hooks:
       - id: check-case-conflict
       - id: check-symlinks
@@ -45,7 +45,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.31.1
+    rev: v0.32.2
     hooks:
       - id: markdownlint
         # MD013: line too long
@@ -54,7 +54,7 @@ repos:
         args: [--disable, MD013, MD033, MD041, '--']
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.1.0
+    rev: v2.2.1
     hooks:
       - id: codespell
         stages: [commit-msg]
