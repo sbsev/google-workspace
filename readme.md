@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://studenten-bilden-schueler.de"><img src="assets/favicon.svg" alt="Favicon" width=150></a>
+  <a href="https://studenten-bilden-schueler.de"><img src="gmail/images/sbs-owls.svg" alt="Favicon" width=150></a>
 </p>
 
 <h1 align="center">
@@ -18,6 +18,5 @@
 
 Folders of interest:
 
-- [`email-signatures`](email-signatures): Contains HTML email signatures for chapter and board accounts plus associated image assets
 - [`gam-guide.md`](gam-guide.md): Illustrated guide to the [GAM CLI](https://github.com/jay0lee/GAM) for Google Workspace
 - [`google-workspace-scripts`](google-workspace-scripts): Python script for querying and visualizing creation date and last login statistics of Workspace accounts.

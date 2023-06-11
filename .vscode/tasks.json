@@ -1,0 +1,17 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Docker Build",
+            "type": "shell",
+            "command": "docker build . -t gam",
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker Run",
+            "type": "shell",
+            "command": "docker run -d gam",
+            "problemMatcher": []
+        }
+    ]
+}
