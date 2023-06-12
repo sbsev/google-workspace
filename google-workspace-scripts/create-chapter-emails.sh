@@ -1,6 +1,8 @@
 #!/bin/bash
 # This script requires authorized gam scope
 
+# Path to GAM executable
+# Should be this of you installed it correctly
 GAM_EXC_PATH="/root/bin/gam/gam"
 
 getRecovName() {
@@ -19,26 +21,48 @@ getRecovName() {
     esac
 }
 
+#####################
+## Read user input ##
+#####################
+
 echo -n "Please enter a city name (lowercase): "
 read cityName
-
 
 echo -n "Now creating accounts (info, studenten, schueler) for $cityName. Confirm? (Y/N)"
 read consent
 
+
+#######################
+## Validate to start ##
+#######################
+
 # Terminate if the answer is not "Y"
-[ "$consent" != "Y" ] && exit 1;
+if [ ! "y" == "${consent,,}" ];
+then
+    echo "Option not valid"
+    exit 1;
+fi
+
+#########################################
+## Create the mapping and city strings ##
+#########################################
 
 # Set lower- and uppercase city names
 city=$(echo "$cityName" | tr "[:upper:]" "[:lower:]")
 City=$(echo "$city" | sed 's/[^ _-]*/\u&/g')
 
-# Set the default
+# Set the mapping
 declare -A divisions=([schueler]=Schüler [studenten]=Studierende [info]=Kommunikation)
 
+###########################################
+## Create Users for each divison in the  ##
+## new city as well as first-time setup  ##
+## e.g. signatures, profile picture, ... ##
+###########################################
 
 for div in "${!divisions[@]}";
 do
+    # Create the account
     $GAM_EXC_PATH create user $div.$city \
     firstname ${divisions[$div]} \
     lastname $City \
@@ -47,10 +71,12 @@ do
     org /Standorte \
     recoveryemail "$(getRecovName $div)".$city@studenten-bilden-schueler.de
     
+    # Set profile picture & signature
     $GAM_EXC_PATH user $div.$city update photo gmail/images/sbs-owls.png
     $GAM_EXC_PATH update group $div add member $div.$city
     $GAM_EXC_PATH user $div.$city signature file gmail/signatures/chapters.html html replace firstName ${divisions[$div]} replace lastName $City
 done
 
+# Division info needs special treatment
 $GAM_EXC_PATH update group kommunikation add member info.$city
 $GAM_EXC_PATH update group info remove member info.$city

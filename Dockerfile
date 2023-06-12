@@ -1,10 +1,12 @@
 FROM ubuntu:latest as INSTALLER
 COPY . .
-RUN apt-get update \
-    && apt-get -y upgrade \
-    && apt-get install python3 python3-pip git -y \
-    && apt-get install swig libpcsclite-dev -y \
-    && pip install -r requirements.txt \
-    && pip install -U git+https://github.com/jay0lee/GAM.git#subdirectory=src
+RUN apt-get update 
+RUN apt-get -y upgrade 
+RUN apt-get install curl -y 
+# RUN apt-get install python3 python3-pip -y
 
-CMD "bash <(curl -s -S -L https://gam-shortn.appspot.com/gam-install)"
+RUN apt-get install swig libpcsclite-dev xz-utils -y 
+# RUN pip install -r requirements.txt 
+RUN chmod +x install.sh
+
+CMD ["bash", "-c", "--", "while true; do sleep 30; done;"]
