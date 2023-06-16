@@ -1,54 +1,98 @@
 #!/bin/bash
+# This script requires authorized gam scope, achieved by executing the install script
 
+# Path to GAM executable
+# Should be this if you installed it correctly
 GAM_EXC_PATH="/root/bin/gam/gam"
 
-echo -n "Firstname of Board member"
+########################################
+## Start interactive creation process ##
+########################################
+
+echo -n "Firstname of Board member: "
 read firstName
+l_firstName=$(echo "$firstName" | tr '[:upper:]' '[:lower:]')
 
-echo -n "Lastname of Board member"
+echo -n "Lastname of Board member: "
 read lastName
+l_lastName=$(echo "$lastName" | tr '[:upper:]' '[:lower:]')
 
-echo -n "Login (if $firstName.$lastName just press enter)"
+echo -n "Login (if empty: $l_firstName.$l_lastName): "
 read login
 
+# Set some defaults
 if [ ! -n "${login}" ];
 then
-    login="$firstName.$lastName"
+    login="$l_firstName.$l_lastName"
 fi
 
-echo -n "Recovery email (if empty: it@)"
+echo -n "Recovery email (if empty: it@studenten-bilden-schueler.de): "
 read recovMail
 
+# Set default recovery mail (please don't use it@ as recovery)
 if [ ! -n "${recovMail}" ];
 then
-    recovMail="it@studenten-bilden-schueler.de"
+    recovMail='it@studenten-bilden-schueler.de'
 fi
 
 groups=("bundesvorstand")
 
-while ! [ "${group,,}" == "d" ];
-    echo -n "Which other group should the user be added to (besides BV)?"
-    read group
-    group=${group,,}
-    if [ ! "${groups[@]}" in *"${group}"* ];
-    then
-        groups+=(${group})
-    else
-        echo -n "Group already present."
-    fi
+##################################
+## Add user to workspace groups ##
+##   Default: Bundesvorstand    ##
+##################################
 
-    echo -n "Do you wish to add more groups? (Y/N)"
+while :
+do
+    # Get the group name
+    # Note: This name is assumed to be the email adress of the group
+    # e.g. if you want to add a user to the IT-group and, since the email
+    # is it@..., you would enter "it" here
+    echo -n "Which other group should the user be added to (besides BV)?: "
+    read group
+    
+    # Set group to lowercase
+    group=$(echo "$group" | tr '[:upper:]' '[:lower:]')
+    
+    # Check whether group is already in scope
+    if ! [[ ${groups[*]} =~ "$group" ]];
+    then
+        groups+=("${group}")
+    else
+        echo -n "Group already present. "
+    fi
+    
+    echo -n "Do you wish to add more groups? (Y/N): "
     read more
-    if [ ! "y" == "${more,,}" ] && break;
+    more=$(echo "$more" | tr '[:upper:]' '[:lower:]')
+    
+    # If "N/n" is selected, terminate loop
+    [ "n" == "$more" ] && break;
 done
 
-echo -n "Image file path (if empty: owl)"
+#########################
+## Image and Signature ##
+#########################
+
+echo -n "Image file path (if empty: owl): "
 read imgFilePath
 
 if [ ! -n "${imgFilePath}" ];
 then
-    imgFilePath=gmail/images/sbs-owls.png
+    imgFilePath="../gmail/images/sbs-owls.png"
 fi
+
+echo -n "Signature file (if empty: board.html): "
+read signPath
+
+if [ ! -n "$signPath"  ];
+then
+    signPath="../gmail/signatures/board.html"
+fi
+
+#########################
+## Finally: GAM action ##
+#########################
 
 # Create account
 $GAM_EXC_PATH create user $login \
@@ -59,10 +103,13 @@ changepassword on \
 org /Bundesvorstand \
 recoveryemail $recovMail
 
-$GAM_EXC_PATH user $login signature file $imgFilePath html replace firstName $firstName replace lastName $lastName
-# set initial profile picture to owl logo just so its not empty
-$GAM_EXC_PATH user $login update photo gmail/images/sbs-owls.png
+# Add the signature
+$GAM_EXC_PATH user $login signature file $signPath html replace firstName $firstName replace lastName $lastName
 
+# Add the profile picture
+$GAM_EXC_PATH user $login update photo $imgFilePath
+
+# Add to all groups specified
 for group in "${groups[@]}";
 do
     $GAM_EXC_PATH update group ${group} add member $login

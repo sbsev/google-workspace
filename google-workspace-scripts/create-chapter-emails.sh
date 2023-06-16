@@ -1,10 +1,11 @@
 #!/bin/bash
-# This script requires authorized gam scope
+# This script requires authorized gam scope, achieved by executing the install script
 
 # Path to GAM executable
-# Should be this of you installed it correctly
+# Should be this if you installed it correctly
 GAM_EXC_PATH="/root/bin/gam/gam"
 
+# Gets the recovery email adress (circular dependency, order is arbitrary)
 getRecovName() {
     case $1 in
         schueler)
@@ -52,6 +53,7 @@ city=$(echo "$cityName" | tr "[:upper:]" "[:lower:]")
 City=$(echo "$city" | sed 's/[^ _-]*/\u&/g')
 
 # Set the mapping
+# emailprefix <-> name in google workspace
 declare -A divisions=([schueler]=Schüler [studenten]=Studierende [info]=Kommunikation)
 
 ###########################################

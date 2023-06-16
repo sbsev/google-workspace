@@ -10,7 +10,7 @@
         {
             "label": "Docker Run",
             "type": "shell",
-            "command": "docker run -d gam",
+            "command": "docker run -v C:/Users/geiss/Documents/SbS/BV/google-workspace/:/home/ -d gam",
             "problemMatcher": []
         }
     ]

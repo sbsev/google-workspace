@@ -1,0 +1,5 @@
+license
+*.md
+*.y[a]ml
+.vscode
+**[dD]ocker**

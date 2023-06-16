@@ -11,6 +11,7 @@ read cityName
 city=$(echo $cityName | tr "[:upper:]" "[:lower:]")
 
 # Set the mapping
+# emailprefix <-> name in google workspace
 declare -A divisions=([schueler]=Schüler [studenten]=Studierende [info]=Kommunikation)
 
 for div in "${!divisions[@]}";
