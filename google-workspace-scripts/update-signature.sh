@@ -10,7 +10,7 @@ echo -n "Login name (e.g. firstname.lastname): "
 read login
 
 # Get the new signature path
-echo -n "Signature file path (defaults to board.html)"
+echo -n "Signature file path (defaults to board.html): "
 read signPath
 
 # Set the default to board signature
@@ -24,15 +24,15 @@ fi
 ###############################
 
 # First name (capitalize pls)
-echo -n "Firstname"
+echo -n "First name: "
 read firstName
 
 # Last name (capitalize pls)
-echo -n "Lastname"
+echo -n "Last name: "
 read lastName
 
 # Department the user is engaged
-echo -n "Department (defaults to BV)"
+echo -n "Department (defaults to 'Bundesvorstand'): "
 read department
 
 # Default department: Bundesvorstand
@@ -42,7 +42,7 @@ then
 fi
 
 # Description of role the user has
-echo -n "Jobtitle (e.g. IT)"
+echo -n "Jobtitle (e.g. IT): "
 read jobTitle
 
 ## The signature will look somewhat like this (assuming board.html)
@@ -50,5 +50,4 @@ read jobTitle
 ## {firstName} {lastName}
 ## {department} {jobTitle}
 ## studenten-bilden-schueler.de
-
-$GAM_EXC_PATH user $login signature file $signPath html replace firstName $firstName replace lastname $lastName replace department $department replace jobtitle $jobTitle
+$GAM_EXC_PATH user $login signature file $signPath html replace firstName $firstName replace lastName $lastName replace department $department replace jobtitle $jobTitle

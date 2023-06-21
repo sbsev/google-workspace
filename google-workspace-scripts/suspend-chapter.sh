@@ -5,7 +5,7 @@
 # Should be this of you installed it correctly
 GAM_EXC_PATH="/root/bin/gam/gam"
 
-echo -n "Please enter a city name (lowercase)"
+echo -n "Please enter a city name: "
 read cityName
 
 city=$(echo $cityName | tr "[:upper:]" "[:lower:]")

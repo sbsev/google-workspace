@@ -135,7 +135,7 @@ gam update user <email address>
  [gal on|off] [suspended on|off] [archived on|off]
  [sha] [md5] [crypt] [nohash]
  [changepassword on|off] [org <Org Name>]
- [recoveryemail <email> [recoveryphone <phone>]
+ [recoveryemail <email>] [recoveryphone <phone>]
 ```
 
 ## Example 2: Create account for new board member
