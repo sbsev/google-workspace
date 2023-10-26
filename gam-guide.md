@@ -8,5 +8,4 @@ As our chapter count grows, so does the size of our [Google Workspace](https://w
 
 GAM is a powerful command line interface (CLI) with comprehensive batch operations for all manner of Google Workspace functionality. It's available at <https://github.com/jay0lee/gam>.
 
-
 ## TODO
