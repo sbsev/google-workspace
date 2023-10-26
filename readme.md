@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">
-  Code, Assets and Guides for our Google Workspace
+  Tools for automating Google Workspace
 </h1>
 
 <h3 align="center">
