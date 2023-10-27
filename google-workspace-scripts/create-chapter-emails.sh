@@ -11,11 +11,11 @@ getRecovName() {
         schueler)
             echo "studenten";
         ;;
-        
+
         info)
             echo "schueler";
         ;;
-        
+
         studenten)
             echo "info";
         ;;
@@ -72,7 +72,7 @@ do
     changepassword on \
     org /Standorte \
     recoveryemail "$(getRecovName $div)".$city@studenten-bilden-schueler.de
-    
+
     # Set profile picture & signature
     $GAM_EXC_PATH user $div.$city update photo gmail/images/sbs-owls.png
     $GAM_EXC_PATH update group $div add member $div.$city

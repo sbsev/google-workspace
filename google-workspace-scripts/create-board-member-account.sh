@@ -50,10 +50,10 @@ do
     # is it@..., you would enter "it" here
     echo -n "Which other group should the user be added to (besides BV)?: "
     read group
-    
+
     # Set group to lowercase
     group=$(echo "$group" | tr '[:upper:]' '[:lower:]')
-    
+
     # Check whether group is already in scope
     if ! [[ ${groups[*]} =~ "$group" ]];
     then
@@ -61,11 +61,11 @@ do
     else
         echo -n "Group already present. "
     fi
-    
+
     echo -n "Do you wish to add more groups? (Y/N): "
     read more
     more=$(echo "$more" | tr '[:upper:]' '[:lower:]')
-    
+
     # If "N/n" is selected, terminate loop
     [ "n" == "$more" ] && break;
 done

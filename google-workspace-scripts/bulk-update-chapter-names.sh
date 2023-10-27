@@ -33,7 +33,7 @@ do
         email="${line[3]}"
         # Remove everything before the dot (including)
         tmp="${email#*.}"
-        
+
         # Remove everything after the @ symbol (including)
         result="${tmp%%@*}"
         cities+=("$result")
