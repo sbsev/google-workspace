@@ -35,7 +35,7 @@ for user_email in "${users[@]}";
 do
     username=$(echo "$user_email" | cut -d '@' -f 1)
     echo "Updating $username"
-    
+
     $GAM_EXC_PATH update user \
     "$user_email" email "$username$new_suff"
 done
@@ -58,18 +58,18 @@ do
     if [[ "${line[0]}" == "$searched_group"* ]];
     then
         email="${line[3]}"
-        
+
         # Only update chapters that don't have the new domain
         if [[ "$email" == *"$new_suff"* ]];
         then
             # Remove everything before the dot (including)
             tmp="${email#*.}"
-            
+
             # Remove everything after the @ symbol (including)
             result="${tmp%%@*}"
             chapters+=("$result")
         fi
-        
+
     fi
 done	<	<($GAM_EXC_PATH print group-members group "$searched_group" membernames)
 
@@ -85,9 +85,9 @@ do
         then
             new_scope="studierende"
         fi
-        
+
         echo "Now updating $scope.$chapter"
-        
+
         $GAM_EXC_PATH update user \
         "$scope.$chapter$old_suff" email \
         "$new_scope.$chapter$new_suff"
