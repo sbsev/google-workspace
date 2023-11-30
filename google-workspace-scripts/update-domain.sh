@@ -12,7 +12,7 @@ new_suff="@studytutors.de"
 ## Users ##
 ###########
 
-searched_group="bundesvorstand@$new_suff"
+searched_group="bundesvorstand$new_suff"
 
 declare -a users
 
@@ -46,7 +46,7 @@ done
 ## Chapters ##
 ##############
 
-searched_group="studenten@$old_suff"
+searched_group="studenten$old_suff"
 
 declare -a chapters
 
@@ -84,6 +84,9 @@ do
         if [[ "$scope" == "studenten" ]];
         then
             new_scope="studierende"
+        else if [[ "$scope" == "schueler" ]];
+        then
+            new_scope="nachhilfe"
         fi
 
         echo "Now updating $scope.$chapter"
