@@ -84,11 +84,8 @@ do
         if [[ "$scope" == "studenten" ]];
         then
             new_scope="studierende"
-        else if [[ "$scope" == "schueler" ]];
-        then
-            new_scope="nachhilfe"
         fi
-
+        
         echo "Now updating $scope.$chapter"
 
         $GAM_EXC_PATH update user \
