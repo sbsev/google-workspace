@@ -85,7 +85,7 @@ do
         then
             new_scope="studierende"
         fi
-        
+
         echo "Now updating $scope.$chapter"
 
         $GAM_EXC_PATH update user \
