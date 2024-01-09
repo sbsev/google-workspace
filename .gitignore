@@ -1,3 +1,7 @@
 credentials.json
 token.json
 out.txt
+
+oauth2service.json
+client_secrets.json
+roots.pem

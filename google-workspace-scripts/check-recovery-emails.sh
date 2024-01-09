@@ -2,11 +2,13 @@
 
 GAM_EXC_PATH=/root/bin/gam/gam
 
-searched_group=bundesvorstand@studenten-bilden-schueler.de
+suff=@studytutors.de
+
+searched_group="bundesvorstand$suff"
 
 user_info_line="Recovery Email:"
 
-criterion=it@studenten-bilden-schueler.de
+criterion="it$suff"
 
 declare -a users
 

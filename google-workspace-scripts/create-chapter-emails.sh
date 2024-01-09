@@ -5,6 +5,8 @@
 # Should be this if you installed it correctly
 GAM_EXC_PATH="/root/bin/gam/gam"
 
+suff=@studytutors.de
+
 # Gets the recovery email adress (circular dependency, order is arbitrary)
 getRecovName() {
     case $1 in
@@ -71,7 +73,7 @@ do
     password Abcdef1234 \
     changepassword on \
     org /Standorte \
-    recoveryemail "$(getRecovName $div)".$city@studenten-bilden-schueler.de
+    recoveryemail "$(getRecovName $div)".$city$suff
 
     # Set profile picture & signature
     $GAM_EXC_PATH user $div.$city update photo gmail/images/sbs-owls.png

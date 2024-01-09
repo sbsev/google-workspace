@@ -5,13 +5,13 @@ GAM_EXC_PATH=/root/bin/gam/gam
 # different scopes to be considered
 declare -a cities
 
-suff=@studenten-bilden-schueler.de
+suff=@studytutors.de
 
 orig_IFS=$IFS
 
 # Get all cities that are currently signed up
 # This assumes (for runtime sake) that each chapter has all three accounts
-searched_group=studenten@studenten-bilden-schueler.de
+searched_group="studenten@$suff"
 while IFS=',' read -ra line;
 do
     if [[ "${line[0]}" == "$searched_group"* ]];
@@ -29,7 +29,7 @@ done	<	<($GAM_EXC_PATH print group-members group "$searched_group" membernames)
 # We just need to check one city, if the recovery e-mail is "it@<>" we need to change
 
 user_info_line="Recovery Email:"
-criterion=it@studenten-bilden-schueler.de
+criterion="it$suff"
 
 declare -a needs_update
 

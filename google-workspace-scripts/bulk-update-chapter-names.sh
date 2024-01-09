@@ -19,13 +19,13 @@ scope_name_map["info"]="Kommunikation"
 scope_name_map["studenten"]="Studierende"
 scope_name_map["schueler"]="Schüler"
 
-suff=@studenten-bilden-schueler.de
+suff=@studytutors.de
 
 orig_IFS=$IFS
 
 # Get all cities that are currently signed up
 # This assumes (for runtime sake) that each chapter has all three accounts
-searched_group=studenten@studenten-bilden-schueler.de
+searched_group="studenten$suff"
 while IFS=',' read -ra line;
 do
     if [[ "${line[0]}" == "$searched_group"* ]];

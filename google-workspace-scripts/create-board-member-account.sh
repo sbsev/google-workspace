@@ -5,6 +5,8 @@
 # Should be this if you installed it correctly
 GAM_EXC_PATH="/root/bin/gam/gam"
 
+suff=@studytutors.de
+
 ########################################
 ## Start interactive creation process ##
 ########################################
@@ -26,13 +28,13 @@ then
     login="$l_firstName.$l_lastName"
 fi
 
-echo -n "Recovery email (if empty: it@studenten-bilden-schueler.de): "
+echo -n "Recovery email (if empty: it$suff): "
 read recovMail
 
 # Set default recovery mail (please don't use it@ as recovery)
 if [ ! -n "${recovMail}" ];
 then
-    recovMail='it@studenten-bilden-schueler.de'
+    recovMail='it$suff'
 fi
 
 groups=("bundesvorstand")
