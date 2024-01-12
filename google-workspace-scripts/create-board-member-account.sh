@@ -81,7 +81,7 @@ read imgFilePath
 
 if [ ! -n "${imgFilePath}" ];
 then
-    imgFilePath="../gmail/images/sbs-owls.png"
+    imgFilePath="$(readlink -f ../gmail/images/sbs-owls.png)"
 fi
 
 echo -n "Signature file (if empty: board.html): "
@@ -89,7 +89,7 @@ read signPath
 
 if [ ! -n "$signPath"  ];
 then
-    signPath="../gmail/signatures/board.html"
+    signPath=$(readlink -f "../gmail/signatures/board.html")
 fi
 
 #########################

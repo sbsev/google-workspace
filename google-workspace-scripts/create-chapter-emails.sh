@@ -76,9 +76,9 @@ do
     recoveryemail "$(getRecovName $div)".$city$suff
 
     # Set profile picture & signature
-    $GAM_EXC_PATH user $div.$city update photo gmail/images/sbs-owls.png
+    $GAM_EXC_PATH user $div.$city update photo $(readlink -f "../gmail/images/sbs-owls.png")
     $GAM_EXC_PATH update group $div add member $div.$city
-    $GAM_EXC_PATH user $div.$city signature file gmail/signatures/chapters.html html replace firstName ${divisions[$div]} replace lastName $City
+    $GAM_EXC_PATH user $div.$city signature file $(readlink -f "../gmail/signatures/chapters.html") html replace firstName ${divisions[$div]} replace lastName $City
 done
 
 # Division info needs special treatment

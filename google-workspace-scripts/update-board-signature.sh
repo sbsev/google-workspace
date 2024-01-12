@@ -16,7 +16,7 @@ read signPath
 # Set the default to board signature
 if [ ! -n "$signPath" ];
 then
-    signPath="../gmail/signatures/board.html"
+    signPath=$(readlink -f "../gmail/signatures/board.html")
 fi
 
 ###############################
