@@ -85,7 +85,7 @@ do
         then
             new_scope="studierende"
         fi
-        
+
         echo "Now updating $scope.$chapter"
 
         $GAM_EXC_PATH update user \
@@ -118,4 +118,5 @@ do
     $GAM_EXC_PATH update group "$group$old_suff" email "$group$new_suff"
 done
 
+# Reset IFS
 IFS=$orig_IFS
