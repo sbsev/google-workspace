@@ -11,7 +11,7 @@ orig_IFS=$IFS
 
 # Get all cities that are currently signed up
 # This assumes (for runtime sake) that each chapter has all three accounts
-searched_group="studenten@$suff"
+searched_group="studenten$suff"
 while IFS=',' read -ra line;
 do
     if [[ "${line[0]}" == "$searched_group"* ]];
@@ -29,7 +29,7 @@ done	<	<($GAM_EXC_PATH print group-members group "$searched_group" membernames)
 # We just need to check one city, if the recovery e-mail is "it@<>" we need to change
 
 user_info_line="Recovery Email:"
-criterion="it$suff"
+criterion="studenten.$chapter"
 
 declare -a needs_update
 
@@ -37,11 +37,13 @@ for chapter in "${cities[@]}";
 do
     while IFS= read -r line;
     do
-        if [[ "$line" == "$user_info_line $criterion"* ]];
+
+        if [[ "$line" == *"$user_info_line $criterion"* ]];
         then
+            echo "Found $chapter"
             needs_update+=("$chapter")
         fi
-    done <	<($GAM_EXC_PATH info user "studenten.$chapter$suff")
+    done <	<($GAM_EXC_PATH info user "schueler.$chapter$suff")
 done
 
 # Now we can set the recovery emails in circular closure

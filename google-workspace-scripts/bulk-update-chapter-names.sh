@@ -10,13 +10,13 @@ change_name() {
 }
 
 # different scopes to be considered
-declare -a scopes=("studenten" "schueler" "info")
+declare -a scopes=("studierende" "schueler" "info")
 declare -a cities
 
 # Mapping from scope to name
 declare -A scope_name_map
 scope_name_map["info"]="Kommunikation"
-scope_name_map["studenten"]="Studierende"
+scope_name_map["studierende"]="Studierende"
 scope_name_map["schueler"]="Schüler"
 
 suff=@studytutors.de

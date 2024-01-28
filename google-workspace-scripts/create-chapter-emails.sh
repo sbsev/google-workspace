@@ -11,14 +11,14 @@ suff=@studytutors.de
 getRecovName() {
     case $1 in
         schueler)
-            echo "studenten";
+            echo "studierende";
         ;;
 
         info)
             echo "schueler";
         ;;
 
-        studenten)
+        studierende)
             echo "info";
         ;;
     esac

@@ -110,7 +110,7 @@ do
         group_name=$(echo "$line" | cut -d '@' -f 1)
         groups+=("$group_name")
     fi
-done	<	<($GAM_EXC_PATH print group-members group "$searched_group" membernames)
+done	<	<($GAM_EXC_PATH print groups)
 
 
 for group in "${groups[@]}";
