@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://studenten-bilden-schueler.de"><img src="gmail/images/sbs-owls.svg" alt="Favicon" width=150></a>
+  <a href="https://studytutors.de"><img src="gmail/images/sbs-owls-new.png" alt="Favicon" width=150></a>
 </p>
 
 <h1 align="center">
