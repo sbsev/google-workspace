@@ -45,19 +45,19 @@ do
 done
 
 # Now we can set the recovery emails in circular closure
-declare -a groups=("studenten" "schueler" "info")
+declare -a groups=("studierende" "schueler" "info")
 
 getRecovName() {
     case $1 in
         schueler)
-            echo "studenten";
+            echo "studierende";
         ;;
 
         info)
             echo "schueler";
         ;;
 
-        studenten)
+        studierende)
             echo "info";
         ;;
     esac

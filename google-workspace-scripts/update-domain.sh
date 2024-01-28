@@ -22,9 +22,11 @@ orig_IFS=$IFS
 while IFS=',' read -ra line;
 do
     if [[ "${line[0]}" == "$searched_group"* ]] && \
-    [[ ! "${line[3]}" ==  *"$new_suff"* ]] && \
-    [[ "${line[6]}" == "ACTIVE" ]];
+    [[ ! "${line[3]}" ==  *"$new_suff"* ]];
     then
+        if [[ "${line[3]}" == *'$login'* ]]; then
+            continue
+        fi
         users+=("${line[3]}")
     fi
 done	<	<($GAM_EXC_PATH print group-members group "$searched_group" membernames)
@@ -34,13 +36,11 @@ done	<	<($GAM_EXC_PATH print group-members group "$searched_group" membernames)
 for user_email in "${users[@]}";
 do
     username=$(echo "$user_email" | cut -d '@' -f 1)
-    echo "Updating $username"
+    echo "Updating $username Email"
 
     $GAM_EXC_PATH update user \
     "$user_email" email "$username$new_suff"
 done
-
-
 
 ##############
 ## Chapters ##
@@ -60,7 +60,7 @@ do
         email="${line[3]}"
 
         # Only update chapters that don't have the new domain
-        if [[ "$email" == *"$new_suff"* ]];
+        if [[ ! "$email" == *"$new_suff"* ]];
         then
             # Remove everything before the dot (including)
             tmp="${email#*.}"
@@ -86,11 +86,12 @@ do
             new_scope="studierende"
         fi
 
-        echo "Now updating $scope.$chapter"
+        echo "Now updating $scope.$chapter Email"
 
         $GAM_EXC_PATH update user \
         "$scope.$chapter$old_suff" email \
         "$new_scope.$chapter$new_suff"
+
     done
 done
 
