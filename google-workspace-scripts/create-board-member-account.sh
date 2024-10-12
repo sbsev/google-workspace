@@ -98,15 +98,15 @@ fi
 
 # Create account
 $GAM_EXC_PATH create user $login \
-firstname $firstName \
-lastname $lastName \
+firstname "${firstName}" \
+lastname "${lastName}" \
 password Abcdef1234 \
 changepassword on \
 org /Bundesvorstand \
 recoveryemail $recovMail
 
 # Add the signature
-$GAM_EXC_PATH user $login signature file $signPath html replace firstName $firstName replace lastName $lastName
+$GAM_EXC_PATH user $login signature file $signPath html replace firstName "${firstName}" replace lastName $lastName
 
 # Add the profile picture
 $GAM_EXC_PATH user $login update photo $imgFilePath

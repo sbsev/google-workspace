@@ -56,7 +56,7 @@ City=$(echo "$city" | sed 's/[^ _-]*/\u&/g')
 
 # Set the mapping
 # emailprefix <-> name in google workspace
-declare -A divisions=([schueler]=Schüler [studenten]=Studierende [info]=Kommunikation)
+declare -A divisions=([schueler]=Schüler [studierende]=Studierende [info]=Kommunikation)
 
 ###########################################
 ## Create Users for each divison in the  ##

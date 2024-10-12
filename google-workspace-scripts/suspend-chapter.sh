@@ -12,8 +12,10 @@ city=$(echo $cityName | tr "[:upper:]" "[:lower:]")
 
 # Set the mapping
 # emailprefix <-> name in google workspace
-declare -A divisions=([schueler]=Schüler [studenten]=Studierende [info]=Kommunikation)
+declare -A divisions=([schueler]=Schüler [studierende]=Studierende [info]=Kommunikation)
 
 for div in "${!divisions[@]}";
-    $GAM_EXC_PATH update user $div.$city suspended on
+do
+  echo "$div"
+  $GAM_EXC_PATH update user $div.$city suspended on
 done
