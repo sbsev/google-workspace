@@ -1,7 +1,6 @@
-credentials.json
-token.json
 out.txt
-
-oauth2service.json
-client_secrets.json
+*.json
 roots.pem
+*.jpg
+*.png
+!gmail/images/*.png

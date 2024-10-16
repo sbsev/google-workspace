@@ -3,7 +3,7 @@
 
 # Path to GAM executable
 # Should be this if you installed it correctly
-GAM_EXC_PATH="/root/bin/gam/gam"
+GAM_EXC_PATH="/root/bin/gam7/gam"
 
 # Get the login name of the user
 echo -n "Login name (e.g. firstname.lastname): "
@@ -48,6 +48,10 @@ read jobTitle
 ## The signature will look somewhat like this (assuming board.html)
 ## ---
 ## {firstName} {lastName}
-## {department} {jobTitle}
-## studenten-bilden-schueler.de
-$GAM_EXC_PATH user $login signature file $signPath html replace firstName $firstName replace lastName $lastName replace department $department replace jobtitle $jobTitle
+## {department} | {jobTitle}
+## studytutors.de
+$GAM_EXC_PATH user $login signature file $signPath html \
+ replace firstName "${firstName}" \
+ replace lastName "${lastName}" \
+ replace department "${department}" \
+ replace jobtitle "${jobTitle}"

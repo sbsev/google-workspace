@@ -3,7 +3,7 @@
 
 # Path to GAM executable
 # Should be this of you installed it correctly
-GAM_EXC_PATH="/root/bin/gam/gam"
+GAM_EXC_PATH="/root/bin/gam7/gam"
 
 echo -n "Please enter a city name: "
 read cityName

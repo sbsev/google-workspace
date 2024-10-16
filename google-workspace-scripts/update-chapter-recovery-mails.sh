@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GAM_EXC_PATH=/root/bin/gam/gam
+GAM_EXC_PATH=/root/bin/gam7/gam
 
 # different scopes to be considered
 declare -a cities

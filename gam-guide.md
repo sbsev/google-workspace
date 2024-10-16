@@ -4,10 +4,11 @@ Check out this [**video guide**](https://youtu.be/mVxL8Ou9nSk) for getting start
 
 ## Local setup
 
-    1. Download the files from the internal misc repository.
-    2. Build the docker container.
+    1. Download the files from the internal misc repository
+    2. Build the docker container
     3. Run the docker container
-    4. Execute any script.
+    4. Run `gam oauth2 create` to get your token
+    5. Execute any script
 
 ## Rationale
 

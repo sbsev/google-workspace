@@ -3,7 +3,7 @@
 
 # Path to GAM executable
 # Should be this if you installed it correctly
-GAM_EXC_PATH="/root/bin/gam/gam"
+GAM_EXC_PATH="/root/bin/gam7/gam"
 
 suff=@studytutors.de
 
@@ -102,11 +102,10 @@ firstname "${firstName}" \
 lastname "${lastName}" \
 password Abcdef1234 \
 changepassword on \
-org /Bundesvorstand \
-recoveryemail $recovMail
+org /Bundesvorstand
 
-# Add the signature
-$GAM_EXC_PATH user $login signature file $signPath html replace firstName "${firstName}" replace lastName $lastName
+# Add the recovery email
+$GAM_EXC_PATH user $login recoveryemail "${recovMail}"
 
 # Add the profile picture
 $GAM_EXC_PATH user $login update photo $imgFilePath
@@ -116,3 +115,6 @@ for group in "${groups[@]}";
 do
     $GAM_EXC_PATH update group ${group} add member $login
 done
+
+echo "User successfully created. You might want to update the signature by running"
+echo -e "\e[1;34m     ./update-board-signature.sh\e[0m"

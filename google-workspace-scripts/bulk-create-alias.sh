@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GAM_EXC_PATH="/root/bin/gam/gam"
+GAM_EXC_PATH="/root/bin/gam7/gam"
 
 suff="@studytutors.de"
 
