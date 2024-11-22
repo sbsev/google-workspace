@@ -105,7 +105,7 @@ changepassword on \
 org /Bundesvorstand
 
 # Add the recovery email
-$GAM_EXC_PATH user $login recoveryemail "${recovMail}"
+$GAM_EXC_PATH update user $login recoveryemail "${recovMail}"
 
 # Add the profile picture
 $GAM_EXC_PATH user $login update photo $imgFilePath
